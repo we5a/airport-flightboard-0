@@ -1,0 +1,72 @@
+
+:root {
+--side-border-color: rgba(232, 236, 241, 1);
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+
+.arrivalTime {
+  margin: auto 20px;
+  font-weight: 600;
+}
+
+.sourceBlock {
+  border-left: 1px solid var(--side-border-color);
+  margin: 10px;
+}
+
+.sourcePortName {
+  font-weight: 600;
+  margin: 0 10px 10px;
+}
+
+.providerBlock {
+  font-size: 0.8em;
+  margin: 10px 10px 0;
+}
+
+.status {
+  margin: auto 10px;
+  font-weight: 700;
+  font-size: 0.8em;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.landed, .on-schedule {
+  background-color: green;
+  color: white;
+}
+
+.delayed {
+  color: black;
+  background-color: orange;
+}
+
+.destinationPortName {
+  border-left: 1px solid var(--side-border-color);
+  margin: auto 10px;
+  padding-left: 10px;
+}
+
+.moreBlock {
+  color: green;
+  font-weight: 600;
+  font-size: 0.9em;
+  margin: auto 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.moreBlock span {
+  margin-right: 10px;
+}
+
+.moreBlock span:hover {
+  text-decoration: underline;
+}
