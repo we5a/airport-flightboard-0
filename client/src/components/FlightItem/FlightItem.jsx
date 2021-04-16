@@ -15,7 +15,7 @@ const FlightItem = ({ flight, showDetails }) => {
       <div className={styles.container}>
         <div className={styles.arrivalTime}>{formatTime(flight.scheduledArrival)}</div>
         <div className={styles.sourceBlock}>
-          <div className={styles.sourcePortName}>{flight.sourcePortName}  { flight.sourcePortCode}</div>
+          <div className={styles.sourcePortName}>{flight.sourcePortName}  {flight.sourcePortCode}</div>
 
           <div className={styles.providerBlock}>
             <span>{flight.flightCode}</span>
@@ -24,11 +24,11 @@ const FlightItem = ({ flight, showDetails }) => {
           </div>
         </div>
         <div className={`${styles.status} ${styles[flight.status.toLowerCase().replace(' ', '-')]}`}>{flight.status}</div>
-        <div className={styles.destinationPortName}>Tenerife</div>
-        <div className={styles.moreBlock} onClick={(e) => showDetails(flight.id)}><span>More details</span><ArrowForwardIcon fontSize="small"/></div>
+        <div className={styles.destinationPortName}>Terminal</div>
+        <div className={styles.moreBlock} onClick={(e) => showDetails(flight.id)}><span>More details</span><ArrowForwardIcon fontSize="small" /></div>
       </div>
     </Paper>
   )
-}
+};
 
 export default FlightItem;

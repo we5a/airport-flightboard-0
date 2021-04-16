@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import FlightItem from '../FlightItem/FlightItem';
 import styles from './FlightList.module.css';
 import MainModal from '../MainModal/MainModal';
 import FlightDetails from '../FlightDetails/FlightDetails';
 
-const data = [
+const mockedData = [
   {
     id: '123',
     flightCode: 'LH456',
@@ -23,18 +23,47 @@ const data = [
     flightProvider: 'Ryanair',
     sourcePortName: 'Prague',
     sourcePortCode: 'PR',
-    destinationPortName: 'Tenerife',
-    destinationPortCode: 'tn25',
+    destinationPortName: 'Dublin',
+    destinationPortCode: 'dnc4',
     scheduledArrival: new Date(),
     scheduledDeparture: new Date(),
     status: 'DELAYED'
+  },
+  {
+    id: '678',
+    flightCode: 'ARM3R',
+    flightProvider: 'Armenia',
+    sourcePortName: 'Kyiv',
+    sourcePortCode: 'UKKK',
+    destinationPortName: 'London',
+    destinationPortCode: 'LCY',
+    scheduledArrival: new Date(),
+    scheduledDeparture: new Date(),
+    status: 'DELAYED'
+  },
+  {
+    id: '176',
+    flightCode: 'ARM3R',
+    flightProvider: 'Aerojet',
+    sourcePortName: 'Tallin',
+    sourcePortCode: 'TLC',
+    destinationPortName: 'Sydney',
+    destinationPortCode: 'SDN',
+    scheduledArrival: new Date(),
+    scheduledDeparture: new Date(),
+    status: 'LANDED'
   }
-]
+];
 
 const FlightList = () => {
-  const [flightList, setFlightList] = useState(data);
+  const [flightList, setFlightList] = useState([]);
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [currentFlight, setCurrentFlight] = useState();
+
+  useEffect(() => {
+    // fetch data here
+    setFlightList(mockedData);
+  }, []);
 
   function handleClose() {
     setIsEditOpen(false);
