@@ -15,6 +15,6 @@ const Flight = new Schema(
     status: { type: String, required: true }
   },
   { timestamps: true },
-)
+);
 
-module.exports = mongoose.model('movies', Flight);
+module.exports = mongoose.model('flights', Flight);
