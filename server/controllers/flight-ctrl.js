@@ -26,7 +26,7 @@ deleteFlight = async (req, res) => {
   }).catch(err => console.log(err));
 }
 
-updateFlight = async (req, res) => {
+updateFlight = (req, res) => {
   const body = req.body
 
   if (!body) {
@@ -43,15 +43,13 @@ updateFlight = async (req, res) => {
         message: 'Flight not found!',
       });
     }
-    flight.flightCode = body.flightCode;
-    flight.flightProvider = body.flightProvider;
-    flight.sourcePortName = body.sourcePortName;
-    flight.sourcePortCode = body.sourcePortCode;
-    flight.destinationPortName = body.destinationPortName;
-    flight.destinationPortCode = body.destinationPortCode;
-    flight.scheduledArrival = body.scheduledArrival;
-    flight.scheduledDeparture = body.scheduledDeparture;
-    flight.status = body.status;
+
+    Object.entries(body).map(([key, value]) => {
+      if (!['_id', '__v'].includes(key)) {
+        flight[key] = value;
+      }
+    });
+
     flight
       .save()
       .then(() => {
@@ -106,7 +104,7 @@ addFlight = async (req, res) => {
     } else {
       return res.status(406).json({
         id: body.id,
-        message: 'Flight exists, not acceptable'
+        message: 'Flight item already exists, not acceptable'
       });
     }
 
