@@ -3,6 +3,7 @@ import Paper from '@material-ui/core/Paper';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import moment from 'moment';
 import styles from './FlightItem.module.css';
+import Grid from '@material-ui/core/Grid';
 
 const FlightItem = ({ flight, showDetails }) => {
 
@@ -12,21 +13,33 @@ const FlightItem = ({ flight, showDetails }) => {
 
   return (
     <Paper>
-      <div className={styles.container}>
-        <div className={styles.arrivalTime}>{formatTime(flight.scheduledArrival)}</div>
-        <div className={styles.sourceBlock}>
-          <div className={styles.sourcePortName}>{flight.sourcePortName}  {flight.sourcePortCode}</div>
+      <Grid container style={{marginTop: '10px', marginBottom: '10px'}}>
+        <div className={styles.container}>
+          <Grid item xs={2}>
+            <div className={styles.arrivalTime}>{formatTime(flight.scheduledArrival)}</div>
+          </Grid>
+          <Grid item xs={4}>
+            <div className={styles.sourceBlock}>
+              <div className={styles.sourcePortName}>{flight.sourcePortName}  {flight.sourcePortCode}</div>
 
-          <div className={styles.providerBlock}>
-            <span>{flight.flightCode}</span>
+              <div className={styles.providerBlock}>
+                <span>{flight.flightCode}</span>
             &nbsp;
           <span>{flight.flightProvider}</span>
-          </div>
+              </div>
+            </div>
+          </Grid>
+          <Grid item xs={2}>
+            <div className={`${styles.status} ${styles[flight.status.toLowerCase().replace(' ', '-')]}`}>{flight.status}</div>
+          </Grid>
+          <Grid item xs={1}>
+            <div className={styles.terminal}>Terminal #</div>
+          </Grid>
+          <Grid xs={3 }>
+            <div className={styles.moreBlock} onClick={(e) => showDetails(flight.id)}><span>More details</span><ArrowForwardIcon fontSize="small" /></div>
+          </Grid>
         </div>
-        <div className={`${styles.status} ${styles[flight.status.toLowerCase().replace(' ', '-')]}`}>{flight.status}</div>
-        <div className={styles.destinationPortName}>Terminal</div>
-        <div className={styles.moreBlock} onClick={(e) => showDetails(flight.id)}><span>More details</span><ArrowForwardIcon fontSize="small" /></div>
-      </div>
+      </Grid>
     </Paper>
   )
 };

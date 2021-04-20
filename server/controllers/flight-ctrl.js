@@ -1,7 +1,5 @@
 const Flight = require('../models/flight-board-model');
 
-// store retrieve update delete
-
 getFlights = async (req, res) => {
   await Flight.find({}, (err, flights) => {
     if (err) {
