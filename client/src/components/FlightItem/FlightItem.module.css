@@ -16,6 +16,10 @@
   font-weight: 600;
 }
 
+.arrivalTime span {
+  font-size: 0.8em;
+}
+
 .sourceBlock {
   border-left: 1px solid var(--side-border-color);
   margin: 10px;
@@ -55,6 +59,7 @@
   border-left: 1px solid var(--side-border-color);
   margin: auto 10px;
   padding-left: 10px;
+  white-space: nowrap;
 }
 
 .moreBlock {
@@ -66,6 +71,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  white-space: nowrap;
 }
 
 .moreBlock span {
