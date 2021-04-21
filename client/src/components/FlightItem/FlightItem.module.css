@@ -14,6 +14,7 @@
 .arrivalTime {
   margin: 0 20px;
   font-weight: 600;
+  white-space: nowrap;
 }
 
 .arrivalTime span {
