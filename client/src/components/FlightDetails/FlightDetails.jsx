@@ -1,22 +1,23 @@
 import React, { useState } from 'react';
-import styles from './FlightDetails.module.css';
+import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import moment from 'moment';
+import styles from './FlightDetails.module.css';
 
 const FlightDetails = ({ flightItem, handleClose, deleteFlight, changeStatus }) => {
   const [flightStatus, setFlightStatus] = useState(flightItem.status);
 
-  function handleChangeStatus(e) {
+  const handleChangeStatus = (e) => {
     const status = e.target.value;
     setFlightStatus(status);
     changeStatus(flightItem.id, status);
   }
 
-  function formatDate(date) {
-    return moment(date).format('LLL');
+  const formatDate = (date) => {
+    return moment(date).format('hh:mm DD.MM.YYYY');
   }
 
   return (
@@ -24,14 +25,14 @@ const FlightDetails = ({ flightItem, handleClose, deleteFlight, changeStatus }) 
       <div className={styles.title}>{flightItem.flightCode} {flightItem.flightProvider}</div>
       <Grid container spacing={1} style={{ marginBottom: '20px' }}>
         <Grid item xs={6}>
-          <div className={styles.sourceInfo}>
+          <div>
             <div className={styles.label}>From:</div>
             <div className={styles.airport}>{flightItem.sourcePortName} {flightItem.sourcePortCode}</div>
             <div className={styles.time}>{formatDate(flightItem.scheduledDeparture)}</div>
           </div>
         </Grid>
         <Grid item xs={6}>
-          <div className={styles.destinationInfo}>
+          <div>
             <div className={styles.label}>To:</div>
             <div className={styles.airport}>{flightItem.destinationPortName} {flightItem.destinationPortCode}</div>
             <div className={styles.time}>{formatDate(flightItem.scheduledArrival)}</div>
@@ -53,6 +54,13 @@ const FlightDetails = ({ flightItem, handleClose, deleteFlight, changeStatus }) 
       </div>
     </React.Fragment>
   )
+}
+
+FlightDetails.propTypes = {
+  flightItem: PropTypes.object,
+  handleClose: PropTypes.func,
+  deleteFlight: PropTypes.func,
+  changeStatus: PropTypes.func,
 }
 
 export default FlightDetails;

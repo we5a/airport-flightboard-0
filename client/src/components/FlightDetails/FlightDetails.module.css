@@ -23,10 +23,6 @@
   font-size: 0.9em;
 }
 
-.sourceInfo, .destinationInfo {
-  /* border: 1px solid grey; */
-}
-
 .airport {
   font-weight: 600;
   text-align: center;

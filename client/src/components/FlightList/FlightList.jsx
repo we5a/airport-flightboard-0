@@ -17,11 +17,11 @@ const FlightList = () => {
       .catch((err) => console.log(err));
   }, []);
 
-  function handleClose() {
+  const handleClose = () => {
     setIsEditOpen(false);
   }
 
-  function showDetails(id) {
+  const showDetails = (id) => {
     const flight = flightList.find(flight => flight.id === id);
     if (flight) {
       setCurrentFlight(flight);
@@ -29,7 +29,7 @@ const FlightList = () => {
     }
   }
 
-  function changeStatus(id, status) {
+  const changeStatus = (id, status) => {
     let item;
     const filteredList = flightList.filter(el => {
       if (el.id === id) {
@@ -50,7 +50,7 @@ const FlightList = () => {
     }
   }
 
-  function handleDelete(id) {
+  const handleDelete = (id) => {
     api.deleteFlight(id).then(res => {
       if (res.status === 200) {
         const updatedList = flightList.filter(el => el.id !== id);
@@ -63,7 +63,7 @@ const FlightList = () => {
     }).catch(err => console.log(err));
   }
 
-  function compareDate(a, b) {
+  const compareDate = (a, b) => {
     const dateA = Date.parse(a.scheduledArrival);
     const dateB = Date.parse(b.scheduledArrival);
     if (dateA < dateB) return -1;

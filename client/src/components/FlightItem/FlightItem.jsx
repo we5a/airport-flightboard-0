@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import Paper from '@material-ui/core/Paper';
-import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
-import moment from 'moment';
-import styles from './FlightItem.module.css';
+import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+import moment from 'moment';
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import styles from './FlightItem.module.css';
 
 const FlightItem = ({ flight, showDetails }) => {
   const [arrivalDate, setArrivalDate] = useState();
@@ -22,7 +23,7 @@ const FlightItem = ({ flight, showDetails }) => {
 
   return (
     <Paper>
-      <Grid container style={{marginTop: '10px', marginBottom: '10px'}}>
+      <Grid container style={{margin: '10px 0'}}>
         <div className={styles.container}>
           <Grid item xs={2}>
             <div className={styles.arrivalTime}><span className={styles.date}>{!isArrivesToday && arrivalDate}</span> &nbsp;{arrivalTime}</div>
@@ -52,5 +53,10 @@ const FlightItem = ({ flight, showDetails }) => {
     </Paper>
   )
 };
+
+FlightItem.propTypes = {
+  flight: PropTypes.object,
+  showDetails: PropTypes.func
+}
 
 export default FlightItem;
