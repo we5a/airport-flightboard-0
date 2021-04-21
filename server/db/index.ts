@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const mongoUrl = process.env.MONGO_URL || '127.0.0.1';
+const mongoUrl: string = process.env.MONGO_URL || '127.0.0.1';
 
 mongoose
   .connect(mongoUrl, { useNewUrlParser: true })
@@ -9,4 +9,4 @@ mongoose
 
 const db = mongoose.connection;
 
-module.exports = db;
+export = db;

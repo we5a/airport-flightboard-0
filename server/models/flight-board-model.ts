@@ -17,4 +17,4 @@ const Flight = new Schema(
   { timestamps: true },
 );
 
-module.exports = mongoose.model('flights', Flight);
+export = mongoose.model('flights', Flight);

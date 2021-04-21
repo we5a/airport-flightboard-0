@@ -9,4 +9,4 @@ router.put('/flight/:id', FlightCtrl.updateFlight);
 router.delete('/flight/:id', FlightCtrl.deleteFlight);
 router.get('/flights', FlightCtrl.getFlights);
 
-module.exports = router;
+export = router;
