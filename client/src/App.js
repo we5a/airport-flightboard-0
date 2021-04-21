@@ -9,7 +9,7 @@ export const FlightApiContext = React.createContext();
 function App() {
   const [api] = useState(new Api());
 
-  function handleFill() {
+  const handleFill = () => {
     mockedFlights.forEach(f => {
       api.addFlight(f)
         .then(res => {
@@ -17,6 +17,7 @@ function App() {
         })
         .catch(err => console.log(err));
     });
+    window.location.reload();
   }
 
   return (

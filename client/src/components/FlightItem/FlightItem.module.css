@@ -6,12 +6,18 @@
 .container {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin: 10px 0;
+  flex-grow: 1;
 }
 
 .arrivalTime {
-  margin: auto 20px;
+  margin: 0 20px;
   font-weight: 600;
+}
+
+.arrivalTime span {
+  font-size: 0.8em;
 }
 
 .sourceBlock {
@@ -30,11 +36,13 @@
 }
 
 .status {
-  margin: auto 10px;
+  margin: 0 10px;
   font-weight: 700;
   font-size: 0.8em;
   padding: 5px;
   border-radius: 5px;
+  max-width: 100px;
+  text-align: center;
 }
 
 .landed, .on-schedule {
@@ -47,20 +55,23 @@
   background-color: orange;
 }
 
-.destinationPortName {
+.terminal {
   border-left: 1px solid var(--side-border-color);
   margin: auto 10px;
   padding-left: 10px;
+  white-space: nowrap;
 }
 
 .moreBlock {
   color: green;
   font-weight: 600;
   font-size: 0.9em;
-  margin: auto 10px;
+  margin: 0 15px;
   cursor: pointer;
   display: flex;
   align-items: center;
+  justify-content: flex-end;
+  white-space: nowrap;
 }
 
 .moreBlock span {
