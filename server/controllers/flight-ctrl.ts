@@ -1,6 +1,8 @@
+import { Request, Response } from 'express';
+
 const Flight = require('../models/flight-board-model');
 
-getFlights = async (req, res) => {
+const getFlights = async (req: Request, res: Response) => {
   await Flight.find({}, (err, flights) => {
     if (err) {
       return res.status(400).json({ success: false, error: err })
@@ -14,7 +16,7 @@ getFlights = async (req, res) => {
   }).catch(err => console.log(err));
 }
 
-deleteFlight = async (req, res) => {
+const deleteFlight = async (req: Request, res: Response) => {
   await Flight.findOneAndDelete({ id: req.params.id }, (err, flight) => {
     if (err) {
       return res.status(400).json({ success: false, error: err });
@@ -24,8 +26,8 @@ deleteFlight = async (req, res) => {
   }).catch(err => console.log(err));
 }
 
-updateFlight = (req, res) => {
-  const body = req.body
+const updateFlight = (req: Request, res: Response) => {
+  const body = req.body;
 
   if (!body) {
     return res.status(400).json({
@@ -66,7 +68,7 @@ updateFlight = (req, res) => {
   });
 }
 
-addFlight = async (req, res) => {
+const addFlight = async (req: Request, res: Response) => {
   const body = req.body;
 
   if (!body) {
@@ -79,7 +81,7 @@ addFlight = async (req, res) => {
   const flight = new Flight(body);
 
   if (!flight) {
-    return res.status(400).json({ success: false, error: err })
+    return res.status(400).json({ success: false, error: "Can't create flight" })
   }
 
   await Flight.findOne({ id: body.id }, (err, result) => {
@@ -107,7 +109,6 @@ addFlight = async (req, res) => {
     }
 
   })
-    
 }
 
 module.exports = {
