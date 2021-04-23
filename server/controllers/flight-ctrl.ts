@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
-
-const Flight = require('../models/flight-board-model');
+import { Flight } from '../models/flight-board-model';
 
 const getFlights = async (req: Request, res: Response) => {
   const flights = await Flight.find({});
