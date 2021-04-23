@@ -1,11 +1,11 @@
-const express = require('express');
-const FlightCtrl = require('../controllers/flight-ctrl.ts');
+import express from 'express';
+import * as FlightCtrl from '../controllers/flight-ctrl';
 
-const router = express.Router();
+const flightRouter = express.Router();
 
-router.post('/flight', FlightCtrl.addFlight);
-router.put('/flight/:id', FlightCtrl.updateFlight);
-router.delete('/flight/:id', FlightCtrl.deleteFlight);
-router.get('/flights', FlightCtrl.getFlights);
+flightRouter.post('/flight', FlightCtrl.addFlight);
+flightRouter.put('/flight/:id', FlightCtrl.updateFlight);
+flightRouter.delete('/flight/:id', FlightCtrl.deleteFlight);
+flightRouter.get('/flights', FlightCtrl.getFlights);
 
-export = router;
+export default flightRouter;

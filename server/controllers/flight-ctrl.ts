@@ -71,7 +71,7 @@ const addFlight = async (req: Request, res: Response) => {
   }
 }
 
-module.exports = {
+export {
   getFlights,
   deleteFlight,
   updateFlight,

@@ -1,10 +1,9 @@
-import { Application } from 'express';
-
-const express = require('express');
-require('dotenv').config();
-const cors = require('cors');
-const db = require('./db');
-const flightRouter = require('./routes/flight-board-router');
+import dotenv from 'dotenv';
+dotenv.config();
+import express, { Application } from 'express';
+import cors from 'cors';
+import { db } from './db';
+import flightRouter from './routes/flight-board-router';
 
 const app: Application = express();
 const apiPort: number = Number.parseInt(process.env.PORT) || 3000;
