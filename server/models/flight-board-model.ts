@@ -1,6 +1,4 @@
-import  { Schema, Document } from "mongoose";
-
-const mongoose = require('mongoose');
+import  mongoose, { Schema, Document } from "mongoose";
 
 interface FlightItem extends Document {
   id: String,
@@ -31,6 +29,4 @@ const FlightSchema: Schema = new Schema(
   { timestamps: true },
 );
 
-const Flight: FlightItem = mongoose.model('flights', FlightSchema);
-
-export = Flight;
+export const Flight = mongoose.model<FlightItem>('flights', FlightSchema);

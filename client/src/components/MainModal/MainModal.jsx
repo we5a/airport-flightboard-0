@@ -1,27 +1,9 @@
 import React from 'react';
 import { Modal } from '@material-ui/core';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-
-const useStyles = makeStyles({
-  contentContainer: {
-    position: 'absolute',
-    top: 'calc(40% - 70px)',
-    left: 'calc(50% - 280px)',
-    width: '550px',
-    minHeight: '150px',
-    backgroundColor: 'white',
-    border: '1px solid green',
-    outline: 'none',
-    padding: '20px',
-    fontWeight: 400,
-    color: 'black',
-    borderRadius: '15px'
-  }
-});
+import styles from './MainModal.module.css';
 
 const MainModal = ({ isOpen, handleClose, children }) => {
-  const classes = useStyles();
 
   return (
     <React.Fragment>
@@ -35,7 +17,7 @@ const MainModal = ({ isOpen, handleClose, children }) => {
           }
         }}
       >
-        <div className={classes.contentContainer}>
+        <div className={styles.contentContainer}>
           {children}
 
         </div>

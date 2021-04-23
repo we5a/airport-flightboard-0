@@ -1,4 +1,7 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+dotenv.config();
+
 const mongoUrl: string = process.env.MONGO_URL || '127.0.0.1';
 
 mongoose
@@ -7,6 +10,4 @@ mongoose
     console.error('Connection error', e.message)
   });
 
-const db = mongoose.connection;
-
-export = db;
+export const db = mongoose.connection;

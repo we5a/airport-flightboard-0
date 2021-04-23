@@ -1,0 +1,14 @@
+.contentContainer {
+  position: absolute;
+  top: calc(40% - 70px);
+  left: calc(50% - 280px);
+  width: 550px;
+  min-height: 150pxx;
+  background-color: white;
+  border: 1px solid green;
+  outline: none;
+  padding: 20px;
+  font-weight: 400;
+  color: black;
+  border-radius: 15px;
+}
