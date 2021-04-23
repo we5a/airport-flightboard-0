@@ -1,22 +1,29 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import moment from 'moment';
 import styles from './FlightDetails.module.css';
+import { Flight } from '../../App';
 
-const FlightDetails = ({ flightItem, handleClose, deleteFlight, changeStatus }) => {
-  const [flightStatus, setFlightStatus] = useState(flightItem.status);
+type FlightDetailsProps = {
+  flightItem: Flight,
+  handleClose: () => void,
+  deleteFlight: (id: string) => Promise<void>,
+  changeStatus: (id: string, status: string) => Promise<void>
+}
 
-  const handleChangeStatus = (e) => {
-    const status = e.target.value;
+const FlightDetails = ({ flightItem, handleClose, deleteFlight, changeStatus }: FlightDetailsProps): JSX.Element => {
+  const [flightStatus, setFlightStatus] = useState<Flight["status"]>(flightItem.status);
+
+  const handleChangeStatus = (e: React.ChangeEvent<any>): void => {
+    const status: Flight["status"] = e.target.value;
     setFlightStatus(status);
     changeStatus(flightItem.id, status);
   }
 
-  const formatDate = (date) => {
+  const formatDate = (date: string): string => {
     return moment(date).format('hh:mm DD.MM.YYYY');
   }
 
@@ -54,13 +61,6 @@ const FlightDetails = ({ flightItem, handleClose, deleteFlight, changeStatus }) 
       </div>
     </React.Fragment>
   )
-}
-
-FlightDetails.propTypes = {
-  flightItem: PropTypes.object,
-  handleClose: PropTypes.func,
-  deleteFlight: PropTypes.func,
-  changeStatus: PropTypes.func,
 }
 
 export default FlightDetails;

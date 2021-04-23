@@ -1,9 +1,14 @@
 import React from 'react';
 import { Modal } from '@material-ui/core';
-import PropTypes from 'prop-types';
 import styles from './MainModal.module.css';
 
-const MainModal = ({ isOpen, handleClose, children }) => {
+type MainModalProps = {
+  isOpen: boolean,
+  handleClose: () => void,
+  children: JSX.Element
+}
+
+const MainModal = ({ isOpen, handleClose, children }: MainModalProps): JSX.Element => {
 
   return (
     <React.Fragment>
@@ -24,12 +29,6 @@ const MainModal = ({ isOpen, handleClose, children }) => {
       </Modal>
     </React.Fragment>
   )
-}
-
-MainModal.propTypes = {
-  isOpen: PropTypes.bool,
-  handleClose: PropTypes.func,
-  children: PropTypes.element
 }
 
 export default MainModal;

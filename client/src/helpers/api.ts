@@ -1,6 +1,11 @@
-import * as axios from 'axios';
+import axios, { AxiosResponse, AxiosInstance } from 'axios';
+import { Flight } from '../App';
 
 export default class Api {
+  api_url: string;
+  api_token: string;
+  client: AxiosInstance;
+
   constructor() {
     this.api_url = process.env.REACT_APP_API_URL;
     this.api_token = null;
@@ -8,8 +13,7 @@ export default class Api {
   }
 
   init = () => {
-
-    let headers = {
+    let headers: any = {
       Accept: 'application/json',
       ContentType: 'application/json'
     }
@@ -27,19 +31,19 @@ export default class Api {
     return this.client;
   }
 
-  getFlights = () => {
+  getFlights = (): Promise<AxiosResponse> => {
     return this.init().get('/flights');
   };
 
-  deleteFlight = (flightId) => {
+  deleteFlight = (flightId: string): Promise<AxiosResponse> => {
     return this.init().delete(`/flight/${flightId}`);
   };
 
-  updateFlight = (flightId, data) => {
+  updateFlight = (flightId: string, data: { status: string }): Promise<AxiosResponse> => {
     return this.init().put(`/flight/${flightId}`, data);
   };
 
-  addFlight = (data) => {
+  addFlight = (data: Flight): Promise<AxiosResponse> => {
     return this.init().post(`/flight`, data);
   };
 }

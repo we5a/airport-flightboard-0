@@ -1,18 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import moment from 'moment';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import moment from 'moment';
+import { Flight } from '../../App';
 import styles from './FlightItem.module.css';
 
-const FlightItem = ({ flight, showDetails }) => {
-  const [arrivalDate, setArrivalDate] = useState();
-  const [arrivalTime, setArrivalTime] = useState();
-  const [isArrivesToday, setIsArrivesToday] = useState(true);
+type Moment = moment.Moment;
+type FlightItemProps = {
+  flight: Flight,
+  showDetails: (id: string) => void
+}
+
+const FlightItem = ({ flight, showDetails }: FlightItemProps): JSX.Element => {
+  const [arrivalDate, setArrivalDate] = useState<string>(null);
+  const [arrivalTime, setArrivalTime] = useState<string>(null);
+  const [isArrivesToday, setIsArrivesToday] = useState<boolean>(true);
 
   useEffect(() => {
-    const arrivalDate = moment(flight.scheduledArrival);
+    const arrivalDate: Moment = moment(flight.scheduledArrival);
     setArrivalTime(arrivalDate.format('hh:mm'));
     setArrivalDate(arrivalDate.format('DD.MM'));
 
@@ -53,10 +59,5 @@ const FlightItem = ({ flight, showDetails }) => {
     </Paper>
   )
 };
-
-FlightItem.propTypes = {
-  flight: PropTypes.object,
-  showDetails: PropTypes.func
-}
 
 export default FlightItem;
