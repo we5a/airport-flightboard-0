@@ -1,51 +1,52 @@
 import React, { useEffect, useState, useContext } from 'react';
+import { AxiosResponse } from 'axios';
 import FlightItem from '../FlightItem/FlightItem';
 import styles from './FlightList.module.css';
 import MainModal from '../MainModal/MainModal';
 import FlightDetails from '../FlightDetails/FlightDetails';
-import { FlightApiContext } from '../../App';
+import { FlightApiContext, Flight } from '../../App';
 
-const FlightList = () => {
-  const [flightList, setFlightList] = useState([]);
-  const [isEditOpen, setIsEditOpen] = useState(false);
-  const [currentFlight, setCurrentFlight] = useState();
+const FlightList = (): JSX.Element => {
+  const [flightList, setFlightList] = useState<Flight[]>([]);
+  const [isEditOpen, setIsEditOpen] = useState<boolean>(false);
+  const [currentFlight, setCurrentFlight] = useState<Flight>();
   const api = useContext(FlightApiContext);
 
   useEffect(() => {
     fetchFlights();
   }, []);
 
-  const fetchFlights = async () => {
-    const res = await api.getFlights();
+  const fetchFlights = async (): Promise<void> => {
+    const res: AxiosResponse = await api.getFlights();
     if (res.status === 200) {
       setFlightList(res.data.data);
     }
   }
 
-  const handleClose = () => {
+  const handleClose = (): void => {
     setIsEditOpen(false);
   }
 
-  const showDetails = (id) => {
-    const flight = flightList.find(flight => flight.id === id);
+  const showDetails = (id: string): void => {
+    const flight: Flight = flightList.find(flight => flight.id === id);
     if (flight) {
       setCurrentFlight(flight);
       setIsEditOpen(true);
     }
   }
 
-  const changeStatus = async (id, status) => {
-    const res = await api.updateFlight(id, { status })
+  const changeStatus = async (id: string, status: string): Promise<void> => {
+    const res: AxiosResponse = await api.updateFlight(id, { status });
     if (res.status === 200) {
-      const filteredList = flightList.map(el => el.id === res.data.flight.id ? res.data.flight : el);
+      const filteredList: Flight[] = flightList.map((el: Flight) => el.id === res.data.flight.id ? res.data.flight : el);
       setFlightList(filteredList);
     }
   }
 
-  const handleDelete = async(id) => {
-    const res = await api.deleteFlight(id);
+  const handleDelete = async(id: string): Promise<void> => {
+    const res: AxiosResponse = await api.deleteFlight(id);
       if (res.status === 200) {
-        const updatedList = flightList.filter(el => el.id !== id);
+        const updatedList: Flight[] = flightList.filter(el => el.id !== id);
         setFlightList(updatedList);
         setIsEditOpen(false);
         return;
@@ -54,7 +55,7 @@ const FlightList = () => {
       setIsEditOpen(false);
   }
 
-  const compareDate = (a, b) => {
+  const compareDate = (a: Flight, b: Flight): number => {
     const dateA = Date.parse(a.scheduledArrival);
     const dateB = Date.parse(b.scheduledArrival);
     if (dateA < dateB) return -1;

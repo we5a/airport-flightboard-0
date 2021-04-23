@@ -1,19 +1,33 @@
 import React, { useState } from 'react';
+import { AxiosResponse } from 'axios';
 import styles from './App.module.css';
 import FlightList from './components/FlightList/FlightList';
 import Api from './helpers/api';
 import mockedFlights from './helpers/mocked-flights.json';
 
-export const FlightApiContext = React.createContext();
+export interface Flight {
+  id: string,
+  flightCode: string,
+  flightProvider: string,
+  sourcePortName: string,
+  sourcePortCode: string,
+  destinationPortName: string,
+  destinationPortCode: string,
+  scheduledArrival: string,
+  scheduledDeparture: string,
+  status: 'ON SCHEDULE' | 'DELAYED' | 'LANDED' | string
+}
+
+export const FlightApiContext = React.createContext<Api | null>(null);
 
 const App = () => {
   const [api] = useState(new Api());
 
-  const handleFill = () => {
-    mockedFlights.forEach(async (f) => {
-      const result = await api.addFlight(f);
+  const handleFill = (): void => {
+    mockedFlights.forEach(async (f: Flight) => {
+      const result: AxiosResponse = await api.addFlight(f);
       if (result.status === 201) {
-        console.log('Item added', JSON.parse(result.config.data))
+        console.log('Item added', JSON.parse(result.config.data));
       };
     });
   }
