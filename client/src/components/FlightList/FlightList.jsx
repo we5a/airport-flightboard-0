@@ -12,10 +12,15 @@ const FlightList = () => {
   const api = useContext(FlightApiContext);
 
   useEffect(() => {
-    api.getFlights()
-      .then((res) => { setFlightList(res.data.data) })
-      .catch((err) => console.log(err));
+    fetchFlights();
   }, []);
+
+  const fetchFlights = async () => {
+    const res = await api.getFlights();
+    if (res.status === 200) {
+      setFlightList(res.data.data);
+    }
+  }
 
   const handleClose = () => {
     setIsEditOpen(false);
@@ -29,29 +34,16 @@ const FlightList = () => {
     }
   }
 
-  const changeStatus = (id, status) => {
-    let item;
-    const filteredList = flightList.filter(el => {
-      if (el.id === id) {
-        item = el;
-        return false;
-      }
-      return true;
-    });
-
-    if (item) {
-      item.status = status;
-      api.updateFlight(id, item).then(res => {
-        if (res.status === 200) {
-          filteredList.push(item);
-          setFlightList(filteredList);
-        }
-      }).catch(err => console.log(err));
+  const changeStatus = async (id, status) => {
+    const res = await api.updateFlight(id, { status })
+    if (res.status === 200) {
+      const filteredList = flightList.map(el => el.id === res.data.flight.id ? res.data.flight : el);
+      setFlightList(filteredList);
     }
   }
 
-  const handleDelete = (id) => {
-    api.deleteFlight(id).then(res => {
+  const handleDelete = async(id) => {
+    const res = await api.deleteFlight(id);
       if (res.status === 200) {
         const updatedList = flightList.filter(el => el.id !== id);
         setFlightList(updatedList);
@@ -60,7 +52,6 @@ const FlightList = () => {
       }
       console.log("Can't delete the flight with id", id);
       setIsEditOpen(false);
-    }).catch(err => console.log(err));
   }
 
   const compareDate = (a, b) => {

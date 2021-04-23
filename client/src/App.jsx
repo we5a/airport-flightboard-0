@@ -6,18 +6,16 @@ import mockedFlights from './helpers/mocked-flights.json';
 
 export const FlightApiContext = React.createContext();
 
-function App() {
+const App = () => {
   const [api] = useState(new Api());
 
   const handleFill = () => {
-    mockedFlights.forEach(f => {
-      api.addFlight(f)
-        .then(res => {
-          console.log('Add one flight', res);
-        })
-        .catch(err => console.log(err));
+    mockedFlights.forEach(async (f) => {
+      const result = await api.addFlight(f);
+      if (result.status === 201) {
+        console.log('Item added', JSON.parse(result.config.data))
+      };
     });
-    window.location.reload();
   }
 
   return (
